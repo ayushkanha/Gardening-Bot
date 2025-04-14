@@ -40,7 +40,7 @@ embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # Set up Weaviate client without OpenAI API key
 client = weaviate.Client(
-    url=WEAVIATE_URL,
+    cluster_url=WEAVIATE_URL,
     auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY)
 )
 
