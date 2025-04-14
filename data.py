@@ -35,6 +35,6 @@ docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) 
 embedding_model = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # Createing FAISS vector store
-vector_store = Chroma.from_documents(docs, embedding_model)
+vector_store = docs
 
 
