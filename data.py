@@ -38,12 +38,11 @@ docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) 
 # Embedding model (HuggingFaceEmbeddings or SentenceTransformerEmbeddings)
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-# Set up Weaviate client without OpenAI API key
-client = weaviate.Client(
-    cluster_url=WEAVIATE_URL,
-    auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY)
-)
 
+client = weaviate.connect_to_weaviate_cloud(
+    cluster_url=WEAVIATE_URL,
+    auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
+)
 # Create vector store with Weaviate
 vector_store = Weaviate.from_documents(
     documents=docs,
