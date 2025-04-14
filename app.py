@@ -51,7 +51,7 @@ custom_prompt = PromptTemplate(
 if "rag_chain" not in st.session_state:
     st.session_state.rag_chain = RetrievalQA.from_chain_type(
         llm=llama,  # your Llama 3.2 model instance
-        retriever=data.vector_store,
+        retriever=data.vector_store.as_retriever(),
         chain_type="stuff",
         chain_type_kwargs={"prompt": custom_prompt},
         return_source_documents=True
