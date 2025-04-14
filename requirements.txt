@@ -1,5 +1,4 @@
 streamlit
-re
 requests
 pandas
 glob
