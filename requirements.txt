@@ -20,3 +20,4 @@ torch
 google_search_results==2.4.2
 google-serp-api
 googlesearch-python
+weaviate-client
