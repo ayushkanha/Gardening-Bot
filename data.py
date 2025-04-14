@@ -1,10 +1,13 @@
-from langchain.vectorstores import Chroma
-from sentence_transformers import SentenceTransformer
-from langchain_community.embeddings import SentenceTransformerEmbeddings
-from langchain.docstore.document import Document
-# import faiss
-from langchain_groq import ChatGroq
-from langchain.chains import RetrievalQA
+from langchain.schema import Document
+from langchain.vectorstores import Weaviate
+from langchain.embeddings import HuggingFaceEmbeddings  # or SentenceTransformerEmbeddings
+import weaviate
+import os
+
+# Set your credentials (use streamlit secrets in production)
+WEAVIATE_URL = "https://your-cluster.weaviate.network"
+WEAVIATE_API_KEY = "your-api-key"
+
 raw_docs = [
     {"title": "Tomato Planting Guide", "content": "Tomatoes grow best in warm weather with full sunlight. Use loamy soil with a pH of 6.0 to 6.8. Fertilize with 10-10-10 fertilizer every 2 weeks."},
     {"title": "Spinach Growing Tips", "content": "Spinach prefers cool climates and can be sown in early spring or fall. Water regularly and harvest when leaves are 4-6 inches long."},
@@ -29,12 +32,26 @@ raw_docs = [
 
 ]
 
-# Convertinto into Document objects
+
 docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) for doc in raw_docs]
 
-embedding_model = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+# Embedding model
+embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-# Createing FAISS vector store
-vector_store = docs
+# Set up Weaviate client
+client = weaviate.Client(
+    url=WEAVIATE_URL,
+    auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY),
+    additional_headers={"X-OpenAI-Api-Key": os.environ.get("OPENAI_API_KEY")}  # Only needed if using OpenAI inside Weaviate
+)
+
+# Create vector store
+vector_store = Weaviate.from_documents(
+    documents=docs,
+    embedding=embedding_model,
+    client=client,
+    index_name="GardeningDocs",
+    by_text=False  # Set to True if Weaviate is doing its own embedding
+)
 
 
