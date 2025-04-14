@@ -5,8 +5,8 @@ import weaviate
 import os
 
 # Set your credentials (use streamlit secrets in production)
-WEAVIATE_URL = "https://your-cluster.weaviate.network"
-WEAVIATE_API_KEY = "your-api-key"
+WEAVIATE_URL = "https://qu85netishekhqbq5zlcw.c0.asia-southeast1.gcp.weaviate.cloud"
+WEAVIATE_API_KEY = "4nCZSAihsHVd54mnaPtsEBJmZPE4WQlxHAJQ"
 
 raw_docs = [
     {"title": "Tomato Planting Guide", "content": "Tomatoes grow best in warm weather with full sunlight. Use loamy soil with a pH of 6.0 to 6.8. Fertilize with 10-10-10 fertilizer every 2 weeks."},
