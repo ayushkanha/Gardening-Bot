@@ -1,6 +1,7 @@
 streamlit
 requests
 pandas
+numpy
 langchain
 langchain_groq
 langchain-community
