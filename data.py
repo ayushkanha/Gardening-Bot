@@ -1,9 +1,10 @@
 from langchain.schema import Document
-from langchain.vectorstores import Weaviate
 from langchain.embeddings import HuggingFaceEmbeddings  # or SentenceTransformerEmbeddings
 import weaviate
 from weaviate.classes.init import Auth
 import os
+from langchain_community.vectorstores import Weaviate
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Set your credentials (use streamlit secrets in production)
 WEAVIATE_URL = "https://qu85netishekhqbq5zlcw.c0.asia-southeast1.gcp.weaviate.cloud"
