@@ -17,8 +17,7 @@ google-auth-httplib2
 google-auth-oauthlib
 serpapi
 sentence-transformers 
-faiss-cpu
-streamlit
+faiss-cpu==1.7.4
 speechrecognition
 pydub
 deep_translator
