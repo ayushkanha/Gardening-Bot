@@ -15,7 +15,7 @@ google-auth-httplib2
 google-auth-oauthlib
 serpapi
 sentence-transformers 
-faiss-cpu==1.7.4
+faiss-cpu==1.6.3
 deep_translator
 gtts 
 torch
