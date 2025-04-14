@@ -3,7 +3,7 @@ from langchain.embeddings import HuggingFaceEmbeddings  # or SentenceTransformer
 import weaviate
 from weaviate.classes.init import Auth
 import os
-from langchain_community.vectorstores import Weaviate
+import weaviate
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Set your credentials (use streamlit secrets in production)
