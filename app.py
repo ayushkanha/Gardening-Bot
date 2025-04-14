@@ -22,10 +22,8 @@ from voice import text_to_speech,transcribe
 from graphs import graph_generator 
 # venv\Scripts\activate
 # ---------------------------------------------------------------------------------------------------------------------------------
-
-load_dotenv()
-groq_key = os.getenv("Groq_API_KEY")
-WETHER_API_KEY = os.getenv("WETHER_API_KEY")
+groq_key = st.secrets["Groq_API_KEY"]
+WETHER_API_KEY = st.secrets["WETHER_API_KEY"]
 # LLM
 llama = ChatGroq(
         temperature=0.2,
