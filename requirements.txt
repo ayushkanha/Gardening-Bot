@@ -5,7 +5,7 @@ langchain
 langchain_groq
 langchain-community
 pydub
-speech_recognition
+SpeechRecognition
 transformers
 matplotlib
 seaborn
