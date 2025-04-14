@@ -8,6 +8,7 @@ import os
 WEAVIATE_URL = "https://qu85netishekhqbq5zlcw.c0.asia-southeast1.gcp.weaviate.cloud"
 WEAVIATE_API_KEY = "4nCZSAihsHVd54mnaPtsEBJmZPE4WQlxHAJQ"
 
+# Sample raw documents
 raw_docs = [
     {"title": "Tomato Planting Guide", "content": "Tomatoes grow best in warm weather with full sunlight. Use loamy soil with a pH of 6.0 to 6.8. Fertilize with 10-10-10 fertilizer every 2 weeks."},
     {"title": "Spinach Growing Tips", "content": "Spinach prefers cool climates and can be sown in early spring or fall. Water regularly and harvest when leaves are 4-6 inches long."},
@@ -29,29 +30,26 @@ raw_docs = [
     {"title": "Using Epsom Salt in the Garden", "content": "Epsom salt provides magnesium and sulfur. Mix 1 tablespoon per gallon of water and apply to tomatoes, peppers, or roses once a month."},
     {"title": "Harvesting Herbs Properly", "content": "Harvest herbs in the morning after dew has dried. Use clean scissors and snip just above a leaf node to encourage bushier growth."},
     {"title": "Winterizing Your Garden", "content": "Remove dead plants, add mulch for insulation, and cover tender perennials. Clean tools and store them dry to prevent rust."}
-
 ]
 
-
+# Convert raw documents into Document objects
 docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) for doc in raw_docs]
 
-# Embedding model
+# Embedding model (HuggingFaceEmbeddings or SentenceTransformerEmbeddings)
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-# Set up Weaviate client
+# Set up Weaviate client without OpenAI API key
 client = weaviate.Client(
     url=WEAVIATE_URL,
-    auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY),
-    additional_headers={"X-OpenAI-Api-Key": os.environ.get("OPENAI_API_KEY")}  # Only needed if using OpenAI inside Weaviate
+    auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY)
 )
 
-# Create vector store
+# Create vector store with Weaviate
 vector_store = Weaviate.from_documents(
     documents=docs,
     embedding=embedding_model,
     client=client,
     index_name="GardeningDocs",
-    by_text=False  # Set to True if Weaviate is doing its own embedding
+    by_text=False  # Set to True if Weaviate does its own embedding
 )
-
 
