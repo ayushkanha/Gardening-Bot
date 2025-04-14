@@ -1,7 +1,6 @@
 streamlit
 requests
 pandas
-glob
 langchain
 langchain_groq
 langchain-community
@@ -9,7 +8,7 @@ pydub
 speech_recognition
 transformers
 matplotlib
-seaborntempfile
+seaborn
 langchain_experimental
 google-api-python-client 
 google-auth-httplib2 
@@ -17,9 +16,6 @@ google-auth-oauthlib
 serpapi
 sentence-transformers 
 faiss-cpu==1.7.4
-speechrecognition
-pydub
 deep_translator
 gtts 
-transformers
 torch
