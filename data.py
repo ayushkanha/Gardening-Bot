@@ -2,6 +2,7 @@ from langchain.schema import Document
 from langchain.vectorstores import Weaviate
 from langchain.embeddings import HuggingFaceEmbeddings  # or SentenceTransformerEmbeddings
 import weaviate
+from weaviate.classes.init import Auth
 import os
 
 # Set your credentials (use streamlit secrets in production)
