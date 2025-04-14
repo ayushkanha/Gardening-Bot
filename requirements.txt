@@ -1,5 +1,4 @@
 streamlit
-chromadb
 requests
 pandas
 numpy
