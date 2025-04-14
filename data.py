@@ -46,7 +46,7 @@ client = weaviate.connect_to_weaviate_cloud(
     auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
 )
 # Create vector store with Weaviate
-vector_store = Weaviate.from_documents(
+vector_store = weaviate.from_documents(
     documents=docs,
     embedding=embedding_model,
     client=client,
