@@ -24,5 +24,5 @@ SpeechRecognition
 streamlit
 torch
 transformers
-weaviate
+weaviate==0.1.2
 weaviate-client==3.25.0
