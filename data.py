@@ -1,7 +1,7 @@
 from langchain.schema import Document
 from sentence_transformers import SentenceTransformer
 import weaviate
-
+from weaviate.classes.init import Auth
 import os
 from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain.vectorstores import Weaviate # Import Weaviate from langchain
@@ -41,9 +41,9 @@ docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) 
 embedding_model = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
-client = weaviate.Client(
-    url=WEAVIATE_URL,
-    auth_client_secret=weaviate.AuthApiKey(WEAVIATE_API_KEY),
+client = weaviate.connect_to_weaviate_cloud(
+    cluster_url=WEAVIATE_URL,
+    auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
 )
 # Create vector store with Weaviate
 vector_store = Weaviate.from_documents(
