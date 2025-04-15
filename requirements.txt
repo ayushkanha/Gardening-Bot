@@ -5,12 +5,12 @@ google-serp-api
 google_search_results
 googlesearch-python
 gTTS
-langchain==0.3.23
-langchain-core==0.3.51
-langchain-community==0.3.21
+langchain
+langchain-core
+langchain-community
 langchain-experimental
-langchain-groq==0.3.2
-langchain-weaviate==0.0.4
+langchain-groq
+langchain-weaviate
 matplotlib
 openpyxl
 numpy
@@ -24,6 +24,6 @@ SpeechRecognition
 streamlit
 torch
 transformers
-weaviate==0.1.2
+weaviate
 weaviate-client
 
