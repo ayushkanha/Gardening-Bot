@@ -5,10 +5,12 @@ google-serp-api
 google_search_results
 googlesearch-python
 gTTS
+langchain==0.3.23
+langchain-core==0.3.51
 langchain-community==0.3.21
 langchain-experimental
 langchain-groq
-langchain==0.3.23
+
 langchain-weaviate
 matplotlib
 openpyxl
