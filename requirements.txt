@@ -24,6 +24,6 @@ SpeechRecognition
 streamlit
 torch
 transformers
-weaviate
-weaviate-client
+chromadb-client 
+langchain-chroma
 
