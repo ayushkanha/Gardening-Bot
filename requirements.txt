@@ -10,8 +10,7 @@ langchain-core==0.3.51
 langchain-community==0.3.21
 langchain-experimental
 langchain-groq==0.3.2
-
-langchain-weaviate
+langchain-weaviate==0.0.4
 matplotlib
 openpyxl
 numpy
