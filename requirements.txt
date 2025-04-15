@@ -25,4 +25,5 @@ streamlit
 torch
 transformers
 weaviate==0.1.2
+weaviate-client==4.0.0
 weaviate-client==3.25.0
