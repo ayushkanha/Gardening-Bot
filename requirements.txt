@@ -8,7 +8,7 @@ gTTS
 langchain-community
 langchain-experimental
 langchain-groq
-langchain
+langchain==0.3.23
 langchain-weaviate
 matplotlib
 openpyxl
