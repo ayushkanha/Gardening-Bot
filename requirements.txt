@@ -5,7 +5,7 @@ google-serp-api
 google_search_results
 googlesearch-python
 gTTS
-langchain-community
+langchain-community==0.3.21
 langchain-experimental
 langchain-groq
 langchain==0.3.23
