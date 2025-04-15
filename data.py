@@ -46,10 +46,13 @@ client = weaviate.connect_to_weaviate_cloud(
     auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
 )
 # Create vector store with Weaviate
-vector_store = Weaviate.from_documents(
-    documents=docs,
-    embedding=embedding_model,
+vector_store = Weaviate(
     client=client,
+    embedding=embedding_model,
     index_name="GardeningDocs",
-    by_text=False  # Set to True if Weaviate does its own embedding
+    text_key="content",  # Specify the key for the text content
+    metadata_keys=["title"], # Specify the keys for metadata
 )
+
+# Add documents to the vector store
+vector_store.add_documents(docs)
