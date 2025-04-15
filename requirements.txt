@@ -23,5 +23,5 @@ SpeechRecognition==3.14.2
 streamlit==1.44.1
 torch==2.6.0
 transformers==4.51.1
-weaviate==1.25.3
+weaviate
 weaviate-client==3.25.0
