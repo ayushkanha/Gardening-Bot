@@ -9,7 +9,7 @@ langchain-community==0.3.21
 langchain-experimental==0.3.4
 langchain-groq==0.3.2
 langchain==0.3.23
-langchain-weaviate==0.0.5
+langchain-weaviate
 matplotlib==3.10.1
 openpyxl==3.1.5
 numpy==2.2.4
