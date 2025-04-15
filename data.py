@@ -40,9 +40,15 @@ docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) 
 embedding_model = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
-vector_store = Chroma.from_documents(
-    documents=docs,
-    embedding=embedding_model,
-    persist_directory=persist_directory,
-    collection_name="gardening_docs" # Optional: Assign a name to your collection
-)
+if os.path.exists(persist_directory):
+    vector_store = Chroma(
+        persist_directory=persist_directory,
+        embedding_function=embedding_model
+    )
+    print("Loaded existing ChromaDB.")
+else:
+    print(f"Error: Persist directory '{persist_directory}' not found.")
+    # Handle error: maybe create it first using from_documents
+    # or raise an exception
+    exit() # Or handle appropriately
+
