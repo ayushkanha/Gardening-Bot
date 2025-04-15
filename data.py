@@ -1,14 +1,14 @@
 from langchain.schema import Document
-from langchain.embeddings import HuggingFaceEmbeddings  # or SentenceTransformerEmbeddings
+from sentence_transformers import SentenceTransformer
 import weaviate
-from weaviate.classes.init import Auth
+
 import os
-import weaviate
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import SentenceTransformerEmbeddings
+from langchain.vectorstores import Weaviate # Import Weaviate from langchain
 
 # Set your credentials (use streamlit secrets in production)
 WEAVIATE_URL = "https://qu85netishekhqbq5zlcw.c0.asia-southeast1.gcp.weaviate.cloud"
-WEAVIATE_API_KEY = "4nCZSAihsHVd54mnaPtsEBJmZPE4WQlxHAJQ"
+WEAVIATE_API_KEY = "bNvFngLMlYHVHuaoq8nt2jPfKxVSzLoqcYAX"
 
 # Sample raw documents
 raw_docs = [
@@ -38,19 +38,18 @@ raw_docs = [
 docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) for doc in raw_docs]
 
 # Embedding model (HuggingFaceEmbeddings or SentenceTransformerEmbeddings)
-embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+embedding_model = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
-client = weaviate.connect_to_weaviate_cloud(
-    cluster_url=WEAVIATE_URL,
-    auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
+client = weaviate.Client(
+    url=WEAVIATE_URL,
+    auth_client_secret=weaviate.AuthApiKey(WEAVIATE_API_KEY),
 )
 # Create vector store with Weaviate
-vector_store = weaviate.from_documents(
+vector_store = Weaviate.from_documents(
     documents=docs,
     embedding=embedding_model,
     client=client,
     index_name="GardeningDocs",
     by_text=False  # Set to True if Weaviate does its own embedding
 )
-
