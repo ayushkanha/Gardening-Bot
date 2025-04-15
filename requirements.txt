@@ -27,3 +27,4 @@ transformers
 chromadb-client 
 langchain-chroma
 hf_xet
+duckduckgo-search
