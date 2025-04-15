@@ -50,9 +50,7 @@ vector_store = Weaviate(
     client=client,
     embedding=embedding_model,
     index_name="GardeningDocs",
-    text_key="content",  # Specify the key for the text content
-    metadata_keys=["title"], # Specify the keys for metadata
-)
+    )
 
 # Add documents to the vector store
 vector_store.add_documents(docs)
