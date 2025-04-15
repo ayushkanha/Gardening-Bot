@@ -1,7 +1,6 @@
 from langchain.schema import Document
 from sentence_transformers import SentenceTransformer
-import weaviate
-from weaviate.classes.init import Auth
+from langchain_chroma import Chroma
 import os
 from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain.vectorstores import Weaviate # Import Weaviate from langchain
@@ -9,7 +8,7 @@ from langchain.vectorstores import Weaviate # Import Weaviate from langchain
 # Set your credentials (use streamlit secrets in production)
 WEAVIATE_URL = "https://qu85netishekhqbq5zlcw.c0.asia-southeast1.gcp.weaviate.cloud"
 WEAVIATE_API_KEY = "bNvFngLMlYHVHuaoq8nt2jPfKxVSzLoqcYAX"
-
+persist_directory = "chroma_db_gardening"
 # Sample raw documents
 raw_docs = [
     {"title": "Tomato Planting Guide", "content": "Tomatoes grow best in warm weather with full sunlight. Use loamy soil with a pH of 6.0 to 6.8. Fertilize with 10-10-10 fertilizer every 2 weeks."},
@@ -41,17 +40,9 @@ docs = [Document(page_content=doc["content"], metadata={"title": doc["title"]}) 
 embedding_model = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
-client = weaviate.connect_to_weaviate_cloud(
-    cluster_url=WEAVIATE_URL,
-    auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
-)
-# Create vector store with Weaviate
-vector_store = Weaviate(
-    client=client,
+vector_store = Chroma.from_documents(
+    documents=docs,
     embedding=embedding_model,
-    index_name="GardeningDocs",
-    text_key="page_content",
-    )
-
-# Add documents to the vector store
-vector_store.add_documents(docs)
+    persist_directory=persist_directory,
+    collection_name="gardening_docs" # Optional: Assign a name to your collection
+)
