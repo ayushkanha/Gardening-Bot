@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import io
 import glob
-
+import data
 from langchain.agents import Tool
 from langchain_groq import ChatGroq
 from langchain.tools import Tool
@@ -47,20 +47,20 @@ custom_prompt = PromptTemplate(
             """
 )
 
-# if "rag_chain" not in st.session_state:
-#     st.session_state.rag_chain = RetrievalQA.from_chain_type(
-#         llm=llama,  # your Llama 3.2 model instance
-#         retriever=data.vector_store.as_retriever(),
-#         chain_type="stuff",
-#         chain_type_kwargs={"prompt": custom_prompt},
-#         return_source_documents=True
-#     )
+if "rag_chain" not in st.session_state:
+    st.session_state.rag_chain = RetrievalQA.from_chain_type(
+        llm=llama,  # your Llama 3.2 model instance
+        retriever=data.vector_store.as_retriever(),
+        chain_type="stuff",
+        chain_type_kwargs={"prompt": custom_prompt},
+        return_source_documents=True
+    )
 # ---------------------------------------------------------------------------------------------------------------------------------
 
 # ✅ Define your query function
-# def rag_tool_func(query: str) -> str:
-#     output = st.session_state.rag_chain({"query": query})
-#     return output["result"]
+def rag_tool_func(query: str) -> str:
+    output = st.session_state.rag_chain({"query": query})
+    return output["result"]
 # Define tools
 def summarize_text(text):
     return llama.predict(f"summerise this:{text}")
@@ -159,11 +159,11 @@ summarization_tool = Tool(
     description="Summarizes long texts into concise points."
 )
 
-# rag_tool = Tool(
-#     name="RAGTool",
-#     func=rag_tool_func,
-#     description="Use this tool to answer gardening questions using expert documents."
-# )
+rag_tool = Tool(
+    name="RAGTool",
+    func=rag_tool_func,
+    description="Use this tool to answer gardening questions using expert documents."
+)
 question_tool = Tool(
     name="QA_Tool",
     func=answer_question,
