@@ -3,11 +3,9 @@ from sentence_transformers import SentenceTransformer
 from langchain_chroma import Chroma
 import os
 from langchain_community.embeddings import SentenceTransformerEmbeddings
-from langchain.vectorstores import Weaviate # Import Weaviate from langchain
 
-# Set your credentials (use streamlit secrets in production)
-WEAVIATE_URL = "https://qu85netishekhqbq5zlcw.c0.asia-southeast1.gcp.weaviate.cloud"
-WEAVIATE_API_KEY = "bNvFngLMlYHVHuaoq8nt2jPfKxVSzLoqcYAX"
+
+
 persist_directory = "chroma_db_gardening"
 # Sample raw documents
 raw_docs = [
@@ -51,4 +49,5 @@ else:
     # Handle error: maybe create it first using from_documents
     # or raise an exception
     exit() # Or handle appropriately
+
 
