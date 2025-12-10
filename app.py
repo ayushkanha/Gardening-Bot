@@ -27,7 +27,7 @@ WETHER_API_KEY = st.secrets["WETHER_API_KEY"]
 llama = ChatGroq(
         temperature=0.2,
         model_name="mistral-saba-24b",
-        groq_api_key="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"
+        groq_api_key=groq_key
     )
 
 # ---------------------------------------------------------------------------------------------------------------------------------
@@ -343,3 +343,4 @@ else:
                             st.sidebar.audio(audio_file, format='audio/mp3', autoplay=True)
                         st.markdown(response)
                         st.session_state.chat_history.append({"role": "assistant", "content": response})
+
